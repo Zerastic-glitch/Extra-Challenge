@@ -1,4 +1,4 @@
-package com.angelo.myapplication
+package com.challenge.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,13 +10,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.container, menuFragment).commit()
+        //stel menu in
+        supportFragmentManager.beginTransaction().add(R.id.container, menuFragment).commit()
+
     }
 
+    //methode voor startknop
     fun startSpel(){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.remove(menuFragment).add(R.id.container, spelFragment).commit()
+        supportFragmentManager.beginTransaction().remove(menuFragment).add(R.id.container, spelFragment).commit()
     }
 
 }

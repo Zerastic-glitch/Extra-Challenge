@@ -1,4 +1,4 @@
-package com.angelo.myapplication
+package com.challenge.myapplication
 
 import org.junit.Test
 
