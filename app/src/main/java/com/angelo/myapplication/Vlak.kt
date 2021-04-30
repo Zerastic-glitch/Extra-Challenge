@@ -1,4 +1,5 @@
 package com.angelo.myapplication
 
-class Vlak {
+class Vlak (){
+    var gekozenDoor : Speler? = null
 }
