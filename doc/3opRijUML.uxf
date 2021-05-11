@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>12</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>480</y>
+      <w>348</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>Spel
+--
+- id: Integer
+--
++ Spel(id: Integer)
++ isGewonnen(): Speler? 
++ nieuweBeurt(vlak:Vlak)
++ getMetaVlak(punt: Vector): MetaVlak
++ isBeschikbaar(vlak: Vlak): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>732</x>
+      <y>240</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Speler
+--
+- Gebruikersnaam: String
+- Symbol: String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>732</x>
+      <y>480</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>MetaVlak
+--
+--
++ isGewonnen(): Speler? 
++ getVlak(punt : Vector): Vlak</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>480</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Vlak
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>516</y>
+      <w>180</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=9</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>972</x>
+      <y>516</y>
+      <w>132</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=9</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>972</x>
+      <y>252</y>
+      <w>276</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=*
+&lt; gekozenDoor</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0;210.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>264</y>
+      <w>312</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=2</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>732</x>
+      <y>624</y>
+      <w>252</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Beurt
+--
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>624</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=*
+</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>972</x>
+      <y>552</y>
+      <w>264</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>200.0;10.0;200.0;100.0;10.0;100.0</additional_attributes>
+  </element>
+</diagram>
