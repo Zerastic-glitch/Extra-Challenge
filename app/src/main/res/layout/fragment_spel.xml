@@ -6,6 +6,7 @@
     tools:context=".SpelFragment">
 
     <GridView
+
         android:numColumns="3"
         android:id="@+id/speelveld"
         android:layout_width="match_parent"
