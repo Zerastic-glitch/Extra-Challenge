@@ -8,6 +8,10 @@ class Spel (private val id : Int, private val spelers : Array<Speler>){
 
     }
 
+    fun isGewonnen(): Speler? {
+        return Veld.isGewonnen(spelers, vlakken, n)
+    }
+
     fun nieuweBeurt(vlak : Vlak){
         val beurt = Beurt(vlak)
     }
