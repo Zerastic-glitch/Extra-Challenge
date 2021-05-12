@@ -6,9 +6,9 @@ import org.junit.Test
 class SpelTest {
     @Test
     fun isGewonnen() {
-        var spelers = Array<Speler>(2){i -> Speler() }
+        var spelers = Array<Speler>(2){i -> Speler("speler ${i+1}", if (i==0) "kruis" else "rondje" ) }
         val speler = spelers[0]
-        val spel = Spel(0, spelers)
+        val spel = Spel(spelers)
 
         Assert.assertNull(spel.isGewonnen())
 

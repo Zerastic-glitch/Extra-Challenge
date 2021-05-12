@@ -8,7 +8,7 @@ class VlakTest {
 
         val vlak = Vlak()
         Assert.assertNull(vlak.gekozenDoor)
-        vlak.gekozenDoor=Speler()
+        vlak.gekozenDoor=Speler("testSpeler", "rondje")
         Assert.assertTrue(vlak.gekozenDoor is Speler)
 
     }

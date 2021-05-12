@@ -1,11 +1,18 @@
 package com.angelo.myapplication
 
-class Spel (private val id : Int, private val spelers : Array<Speler>){
+class Spel (private val spelers : Array<Speler>){
     private val n = 3
+
     private val vlakken : Array<MetaVlak> = Array<MetaVlak>(n*n) { i -> MetaVlak() }
+    private val beurten = ArrayList<Beurt>()
+    private val id : Int
+
+    companion object{
+        private var lastId : Int = 0
+    }
 
     init {
-
+        id=lastId++
     }
 
     fun isGewonnen(): Speler? {
@@ -14,6 +21,9 @@ class Spel (private val id : Int, private val spelers : Array<Speler>){
 
     fun nieuweBeurt(vlak : Vlak){
         val beurt = Beurt(vlak)
+        val speler = spelers[beurten.size % 2]
+        vlak.gekozenDoor=speler
+        beurten.add(beurt)
     }
 
     fun getMetaVlak (punt : Vector) : MetaVlak {
@@ -21,6 +31,6 @@ class Spel (private val id : Int, private val spelers : Array<Speler>){
     }
 
     fun isBeschikbaar (vlak : Vlak) : Boolean {
-        return true
+        return vlak.gekozenDoor==null
     }
 }
