@@ -1,59 +1,89 @@
 package com.angelo.myapplication
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.GridView
+import android.widget.ImageView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SpelFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SpelFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+    //metavlakken met vlakken erin
+    var inhoud = arrayOf(
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel),
+        arrayOf(R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.kruis,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel,R.drawable.cirkel)
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spel, container, false)
+        val v = inflater.inflate(R.layout.fragment_spel, container, false)
+//
+        val speelveld = v.findViewById<GridView>(R.id.speelveld)
+
+
+        speelveld.adapter= GridAdapter(requireContext(), inhoud)
+
+        return v
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SpelFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SpelFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+
+}
+class ImageAdapter(private val context: Context, private val imageArray: Array<Int>) : BaseAdapter() {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val imageView = ImageView(context)
+        imageView.setImageResource(imageArray[position])
+        imageView.scaleType=ImageView.ScaleType.CENTER_CROP
+        imageView.layoutParams = ViewGroup.LayoutParams(80,80)
+
+        //TODO: setOnclick -> imageView
+
+        return imageView
+    }
+    override fun getItem(position: Int): Any {
+        return imageArray[position]
+    }
+    override fun getItemId(position: Int): Long {
+        return 0
+    }
+    override fun getCount(): Int {
+        return imageArray.size
+    }
+}class GridAdapter(private val context: Context, private val inhoud : Array<Array<Int>>) : BaseAdapter() {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
+        //uiteindelijk per 1-9 positie een andere array gebruiken uit de funtionele klassen net als bij ImageAdapter
+
+        val gridView = GridView(context)
+        gridView.columnWidth=50
+        gridView.adapter= ImageAdapter(context, inhoud[position])
+        gridView.layoutParams = ViewGroup.LayoutParams(300,300)
+        gridView.numColumns=3
+
+        return gridView
+    }
+    override fun getItem(position: Int): Any {
+        return 0
+    }
+    override fun getItemId(position: Int): Long {
+        return 0
+    }
+    override fun getCount(): Int {
+        return 9
     }
 }
