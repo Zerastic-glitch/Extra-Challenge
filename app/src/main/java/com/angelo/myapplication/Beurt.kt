@@ -1,4 +1,5 @@
 package com.angelo.myapplication
 
-class Beurt {
+class Beurt (val vlak : Vlak){
+
 }
