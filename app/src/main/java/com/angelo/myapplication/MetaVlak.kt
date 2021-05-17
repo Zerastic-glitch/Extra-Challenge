@@ -10,4 +10,12 @@ class MetaVlak () : Winbaar{
     fun getVlak(punt : Vector) : Vlak {
         return vlakken[punt.x+punt.y*3]
     }
+
+    fun getVlak(positie : Int) : Vlak {
+        return vlakken[positie]
+    }
+
+    fun getVlakken() : Array<Vlak> {
+        return vlakken
+    }
 }
