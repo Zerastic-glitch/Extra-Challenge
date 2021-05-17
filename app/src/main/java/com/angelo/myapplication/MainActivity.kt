@@ -8,18 +8,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.container, MenuFragment())
-        fragmentTransaction.commit()
+
+        mainMenu()
 
     }
 
+    fun mainMenu(){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.container, MenuFragment())
+        fragmentTransaction.commit()
+    }
 
     fun startSpel(){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.container, SpelFragment())
+        fragmentTransaction.replace(R.id.container, SpelFragment())
+        fragmentTransaction.commit()
+    }
+
+    fun eindScherm(speler : Speler){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.container, EindScherm(speler))
         fragmentTransaction.commit()
     }
 
