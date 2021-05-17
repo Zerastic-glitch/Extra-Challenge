@@ -31,7 +31,25 @@ class Spel (val spelers : Array<Speler>){
         return vlakken[punt.x+punt.y*3]
     }
 
+    fun getMetaVlak (positie : Int) : MetaVlak {
+        return vlakken[positie]
+    }
+
     fun isBeschikbaar (vlak : Vlak) : Boolean {
-        return vlak.gekozenDoor==null
+        return vlak.gekozenDoor==null && isValideZet(vlak)
+    }
+
+    fun isValideZet(vlak : Vlak) : Boolean {
+        if(beurten.size < 2) return true
+        val vorigVlak = beurten.get(beurten.size-2).vlak
+        var valideMetavlakPositie = 0
+        for(metavlak in vlakken) {
+            for(i in 0..8) {
+                if(metavlak.getVlak(i) == vorigVlak) {
+                    valideMetavlakPositie = i
+                }
+            }
+        }
+        return (vlak in vlakken.get(valideMetavlakPositie).getVlakken())
     }
 }
