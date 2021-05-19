@@ -50,6 +50,8 @@ class Spel (val spelers : Array<Speler>){
                 }
             }
         }
-        return (vlak in vlakken.get(valideMetavlakPositie).getVlakken())
+        val valideMetavlak = vlakken.get(valideMetavlakPositie)
+        val valideVlakken = vlakken.get(valideMetavlakPositie).getVlakken()
+        return (vlak in valideVlakken || valideMetavlak.isGewonnen(spelers, n) != null)
     }
 }
