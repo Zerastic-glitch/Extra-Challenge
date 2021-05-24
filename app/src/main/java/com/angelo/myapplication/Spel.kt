@@ -52,6 +52,7 @@ class Spel (val spelers : Array<Speler>){
         }
         val valideMetavlak = vlakken.get(valideMetavlakPositie)
         val valideVlakken = vlakken.get(valideMetavlakPositie).getVlakken()
-        return (vlak in valideVlakken || valideMetavlak.isGewonnen(spelers, n) != null)
+        return ((vlak in valideVlakken && valideMetavlak.isGewonnen(spelers, n) == null)
+                || valideMetavlak.isGewonnen(spelers, n) != null)
     }
 }
