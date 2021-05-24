@@ -61,6 +61,7 @@ class SpelFragment : Fragment() {
 
 }
 class ImageAdapter(private val context: Context, private val imageArray: Array<Int>, private val spel: Spel, private val metaVlak: Int, private val activity: MainActivity) : BaseAdapter() {
+    val gridviews = ArrayList<GridView>(9);
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         val container : FrameLayout= FrameLayout(context)
@@ -68,11 +69,8 @@ class ImageAdapter(private val context: Context, private val imageArray: Array<I
         container.setBackgroundResource(R.color.design_default_color_primary_dark)
         val imageView = ImageView(context)
 
-
         imageView.setImageResource(imageArray[position])
         imageView.setBackgroundResource(R.color.design_default_color_primary)
-
-
 
         imageView.scaleType=ImageView.ScaleType.CENTER_CROP
         imageView.layoutParams = ViewGroup.LayoutParams(80,80)
@@ -82,18 +80,16 @@ class ImageAdapter(private val context: Context, private val imageArray: Array<I
             val metaPunt = Vector(metaVlak%3,metaVlak/3)
             val vlakPunt = Vector(position%3,position/3)
 
-            val spelers = ArrayList<Speler>()
+            val spelers = spel.spelers
             if (spel.isBeschikbaar(spel.getMetaVlak(metaPunt).getVlak(vlakPunt))&&spel.getMetaVlak(metaPunt).isGewonnen(spel.spelers, 3)==null){
                 val speler = spel.nieuweBeurt(spel.getMetaVlak(metaPunt).getVlak(vlakPunt))
-                if (spelers.size<2){
-                    spelers.add(speler)
-                }
                 (it as ImageView).setImageResource(speler.symbool)
             }
-            if (spel.getMetaVlak(metaPunt).isGewonnen(spelers.toTypedArray(), 3)!=null)
+            if (spel.getMetaVlak(metaPunt).isGewonnen(spelers, 3)!=null)
                 if (spel.isGewonnen()!=null){
                     activity.eindScherm(spel.isGewonnen()!!)
                 }
+            checkMetavlakIsGewonnen(spel.getMetaVlak(metaPunt))
         }
 
         container.addView(imageView)
@@ -108,15 +104,26 @@ class ImageAdapter(private val context: Context, private val imageArray: Array<I
     override fun getCount(): Int {
         return imageArray.size
     }
+    fun addGridView(view: GridView) {
+        gridviews.add(view)
+    }
+    private fun checkMetavlakIsGewonnen(metavlak: MetaVlak) {
+        if(metavlak.isGewonnen(spel.spelers, 3) != null) {
+            for (d in gridviews.get(0).children) {
+                d.setBackgroundColor(Color.parseColor("#FB4D46"))
+            }
+        }
+    }
 }class GridAdapter(private val context: Context, private val inhoud : Array<Array<Int>>, private val spel : Spel, private val activity: MainActivity) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         //uiteindelijk per 1-9 positie een andere array gebruiken uit de funtionele klassen net als bij ImageAdapter
-
         val gridView = GridView(context)
-
+        System.out.println(gridView.children.javaClass)
+        val imageAdapter = ImageAdapter(context, inhoud[position], spel, position, activity)
+        imageAdapter.addGridView(gridView)
         gridView.columnWidth=50
-        gridView.adapter= ImageAdapter(context, inhoud[position], spel, position, activity)
+        gridView.adapter= imageAdapter
         gridView.layoutParams = ViewGroup.LayoutParams(300,300)
         gridView.numColumns=3
 
