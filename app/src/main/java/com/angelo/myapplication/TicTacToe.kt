@@ -3,36 +3,25 @@ package com.angelo.myapplication
 
 abstract class TicTacToe <T : Winbaar> (val n : Int) {
     lateinit var vlakken : Array<T>
-
-    fun isGewonnen(spelers : Array<Speler>, n: Int): Speler?{
-        for (speler in spelers) {
-            if (isGewonnenDoorSpeler(speler, spelers, n)) {
-                return speler
-            }
-        }
-        return null
-    }
-
-    fun isGewonnenDoorSpeler(speler:Speler, spelers: Array<Speler>, n : Int): Boolean {
-        var endResDiag1 = true
-        var endResDiag2 = true
+    fun isGewonnen(): Boolean { return winnaar() != null; }
+    fun winnaar(): Speler? {
+        var endResDiag1 : Speler? = null
+        var endResDiag2 : Speler? = null
         for (i in 0 until n) {
-            var endResColom = true
-            var endResRij = true
-            endResDiag1 = endResDiag1 && (speler==vlakken[i * n + i].isGewonnen(spelers, n))
-            endResDiag2 = endResDiag2 && (speler==vlakken[i * n + 2-i].isGewonnen(spelers, n))
+            var endResColom : Speler? = null
+            var endResRij : Speler? = null
+            if (vlakken[i * n + i].winnaar() != endResDiag1) endResDiag1 = null;
+            if (vlakken[i * n + 2-i].winnaar() != endResDiag1) endResDiag1 = null;
             for(b in 0 until n) {
-                endResColom = endResColom && speler==vlakken[i * n + b].isGewonnen(spelers, n)
-                endResRij = endResRij && speler==vlakken[b * n + i].isGewonnen(spelers, n)
+                if (vlakken[i * n + b].winnaar() != endResColom) endResColom = null;
+                if (vlakken[b * n + i].winnaar() != endResRij) endResRij = null;
             }
-            if (endResColom || endResRij) {
-                return true
-            }
+            if (endResColom != null) return endResColom
+            if (endResRij != null) return endResRij
         }
-        if (endResDiag1 || endResDiag2) {
-            return true
-        }
-        return false
+        if (endResDiag1 != null) return endResDiag1
+        if (endResDiag2 != null) return endResDiag2
+        return null
     }
 
     fun getVlak(punt : Vector) : T {
@@ -42,5 +31,4 @@ abstract class TicTacToe <T : Winbaar> (val n : Int) {
     fun getVlak(positie : Int) : T {
         return vlakken[positie]
     }
-
 }

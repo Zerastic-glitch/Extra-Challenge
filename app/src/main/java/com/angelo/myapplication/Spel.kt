@@ -13,10 +13,6 @@ class Spel (val spelers : Array<Speler>) : TicTacToe<MetaVlak>(3) {
         id=lastId++
     }
 
-    fun isGewonnen(): Speler? {
-        return super.isGewonnen(spelers, n)
-    }
-
     fun nieuweBeurt(vlak : Vlak) : Speler{
         val beurt = Beurt(vlak)
         val speler = spelers[beurten.size % 2]
@@ -42,8 +38,7 @@ class Spel (val spelers : Array<Speler>) : TicTacToe<MetaVlak>(3) {
         }
         val valideMetavlak = vlakken.get(valideMetavlakPositie)
         val valideVlakken = vlakken.get(valideMetavlakPositie).vlakken
-        return ((vlak in valideVlakken && valideMetavlak.isGewonnen(spelers, n) == null)
-                || valideMetavlak.isGewonnen(spelers, n) != null)
+        return ((vlak in valideVlakken && valideMetavlak.isGewonnen()) || valideMetavlak.isGewonnen())
     }
 
 }
