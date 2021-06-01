@@ -1,7 +1,7 @@
 package com.angelo.myapplication
 
-class MetaVlak () : Winbaar{
-    private val vlakken : Array<Vlak> = Array<Vlak>(9) { i -> Vlak() }
+class MetaVlak (var positie: Int) : Winbaar{
+    private val vlakken : Array<Vlak> = Array<Vlak>(9) { i -> Vlak(this, i) }
 
     override fun isGewonnen (spelers : Array<Speler>, n : Int) : Speler?{
         return Veld.isGewonnen(spelers, vlakken, n)

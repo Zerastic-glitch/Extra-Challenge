@@ -3,7 +3,7 @@ package com.angelo.myapplication
 class Spel (val spelers : Array<Speler>){
     private val n = 3
 
-    private val vlakken : Array<MetaVlak> = Array<MetaVlak>(n*n) { i -> MetaVlak() }
+    private val vlakken : Array<MetaVlak> = Array<MetaVlak>(n*n) { i -> MetaVlak(i) }
     private val beurten = ArrayList<Beurt>()
     private val id : Int
 
@@ -39,20 +39,13 @@ class Spel (val spelers : Array<Speler>){
         return vlak.gekozenDoor==null && isValideZet(vlak)
     }
 
-    fun isValideZet(vlak : Vlak) : Boolean {
+    fun isValideZet(gekozenVlak : Vlak) : Boolean {
         if(beurten.size < 2) return true
-        val vorigVlak = beurten.get(beurten.size-2).vlak
-        var valideMetavlakPositie = 0
-        for(metavlak in vlakken) {
-            for(i in 0..8) {
-                if(metavlak.getVlak(i) == vorigVlak) {
-                    valideMetavlakPositie = i
-                }
-            }
-        }
-        val valideMetavlak = vlakken.get(valideMetavlakPositie)
-        val valideVlakken = vlakken.get(valideMetavlakPositie).getVlakken()
-        return ((vlak in valideVlakken && valideMetavlak.isGewonnen(spelers, n) == null)
-                || valideMetavlak.isGewonnen(spelers, n) != null)
+        val valideMetavlak = vlakken.get(beurten.get(beurten.size-2).vlak.positie)
+        return gekozenVlak.isGewonnen(spelers,n)==null && gekozenVlak.metaVlak.isGewonnen(spelers,n)==null &&
+                (valideMetavlak.isGewonnen(spelers,n)!=null || gekozenVlak.metaVlak==valideMetavlak)
     }
+
+
+
 }
