@@ -1,7 +1,7 @@
 package com.angelo.myapplication
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class MetaVlakTest {
     var kruisId = R.drawable.kruis
@@ -13,12 +13,12 @@ class MetaVlakTest {
         val speler = spelers[0]
         val metavlak = MetaVlak()
 
-        Assert.assertNull(metavlak.isGewonnen(spelers, 3))
+        Assertions.assertNull(metavlak.isGewonnen())
 
         for(i in 0..2) {
             metavlak.getVlak(Vector(i,i)).gekozenDoor = speler
         }
 
-        Assert.assertEquals(speler, metavlak.isGewonnen(spelers, 3))
+        Assertions.assertEquals(speler, metavlak.isGewonnen())
     }
 }
