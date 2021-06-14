@@ -5,27 +5,36 @@ abstract class TicTacToe <T : Winbaar> (val n : Int) {
     lateinit var vlakken : Array<T>
     fun isGewonnen(): Boolean { return winnaar() != null; }
     fun winnaar(): Speler? {
-        var endResDiag1 : Speler? = null
-        var endResDiag2 : Speler? = null
+        var winnaarDiag1 : Speler? = getVlak(Vector(0,0)).winnaar()
+        var winnaarDiag2 : Speler? = getVlak(Vector(n-1,0)).winnaar()
         for (i in 0 until n) {
-            var endResColom : Speler? = null
-            var endResRij : Speler? = null
-            if (vlakken[i * n + i].winnaar() != endResDiag1) endResDiag1 = null;
-            if (vlakken[i * n + 2-i].winnaar() != endResDiag1) endResDiag1 = null;
-            for(b in 0 until n) {
-                if (vlakken[i * n + b].winnaar() != endResColom) endResColom = null;
-                if (vlakken[b * n + i].winnaar() != endResRij) endResRij = null;
+            var winnaarColom : Speler? = getVlak(Vector(i,0)).winnaar()
+            var winnaarRij : Speler? = getVlak(Vector(0,i)).winnaar()
+
+            winnaarDiag1 = getZelfdeWinnaar(winnaarDiag1, i, i)
+
+            winnaarDiag2 = getZelfdeWinnaar(winnaarDiag2, i,(n-1)-i)
+
+            for(b in 1 until n) {
+                winnaarColom = getZelfdeWinnaar(winnaarColom, i, b)
+
+                winnaarRij = getZelfdeWinnaar(winnaarRij, b, i)
             }
-            if (endResColom != null) return endResColom
-            if (endResRij != null) return endResRij
+            if (winnaarColom != null) return winnaarColom
+            if (winnaarRij != null) return winnaarRij
         }
-        if (endResDiag1 != null) return endResDiag1
-        if (endResDiag2 != null) return endResDiag2
+        if (winnaarDiag1 != null) return winnaarDiag1
+        if (winnaarDiag2 != null) return winnaarDiag2
         return null
     }
 
+
+    private fun getZelfdeWinnaar(endRes : Speler?, x : Int, y : Int) : Speler?{
+        return if(getVlak(Vector(x,y)).winnaar() == endRes) endRes else null
+    }
+
     fun getVlak(punt : Vector) : T {
-        return vlakken[punt.x+punt.y*3]
+        return vlakken[punt.x+punt.y*n]
     }
 
     fun getVlak(positie : Int) : T {
