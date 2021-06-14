@@ -1,34 +1,49 @@
 package com.angelo.myapplication
 
 
-abstract class TicTacToe <T : Winbaar> (val n : Int) {
-    lateinit var vlakken : Array<T>
-    fun isGewonnen(): Boolean { return winnaar() != null; }
-    fun winnaar(): Speler? {
-        var endResDiag1 : Speler? = null
-        var endResDiag2 : Speler? = null
-        for (i in 0 until n) {
-            var endResColom : Speler? = null
-            var endResRij : Speler? = null
-            if (vlakken[i * n + i].winnaar() != endResDiag1) endResDiag1 = null;
-            if (vlakken[i * n + 2-i].winnaar() != endResDiag1) endResDiag1 = null;
-            for(b in 0 until n) {
-                if (vlakken[i * n + b].winnaar() != endResColom) endResColom = null;
-                if (vlakken[b * n + i].winnaar() != endResRij) endResRij = null;
+abstract class TicTacToe<T : Winbaar>(val n: Int) {
+    lateinit var vlakken: Array<T>
+    fun isGewonnen(): Boolean {
+        return winnaar() != null; }
+
+    fun or(speler: Speler?, winnaar: Speler?): Speler? {
+        return if (speler == null) {
+            winnaar
+        } else {
+            speler
+        };
+    }
+
+    fun winnaar(start: Vector, direction: Vector): Speler? {
+        var position = start;
+        var result = getVlak(position).winnaar();
+        for (i in 1..(n - 1)) {
+            position = position.add(direction);
+            if (result != getVlak(position).winnaar()) {
+                result = null;
             }
-            if (endResColom != null) return endResColom
-            if (endResRij != null) return endResRij
         }
-        if (endResDiag1 != null) return endResDiag1
-        if (endResDiag2 != null) return endResDiag2
-        return null
+        return result;
     }
 
-    fun getVlak(punt : Vector) : T {
-        return vlakken[punt.x+punt.y*3]
+    fun winnaar(): Speler? {
+        var result: Speler? = null;
+        result = or(result, winnaar(Vector(0, 0), Vector(1, 0)));
+        result = or(result, winnaar(Vector(0, 1), Vector(1, 0)));
+        result = or(result, winnaar(Vector(0, 2), Vector(1, 0)));
+        result = or(result, winnaar(Vector(0, 0), Vector(0, 1)));
+        result = or(result, winnaar(Vector(1, 0), Vector(0, 1)));
+        result = or(result, winnaar(Vector(2, 0), Vector(0, 1)));
+        result = or(result, winnaar(Vector(0, 0), Vector(1, 1)));
+        result = or(result, winnaar(Vector(0, 2), Vector(1, -1)));
+        return result;
     }
 
-    fun getVlak(positie : Int) : T {
+    fun getVlak(punt: Vector): T {
+        return vlakken[punt.x + punt.y * 3]
+    }
+
+    fun getVlak(positie: Int): T {
         return vlakken[positie]
     }
 }
