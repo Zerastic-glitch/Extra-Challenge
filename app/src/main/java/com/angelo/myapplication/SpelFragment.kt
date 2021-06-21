@@ -80,8 +80,7 @@ class ImageAdapter(private val context: Context, private val imageArray: Array<I
             val metaPunt = Vector(metaVlak%3,metaVlak/3)
             val vlakPunt = Vector(position%3,position/3)
 
-            val spelers = spel.spelers
-            if (spel.isBeschikbaar(spel.getVlak(metaPunt).getVlak(vlakPunt))&&spel.getVlak(metaPunt).isGewonnen()){
+            if (spel.isValideZet(spel.getVlak(metaPunt).getVlak(vlakPunt))){
                 val speler = spel.nieuweBeurt(spel.getVlak(metaPunt).getVlak(vlakPunt))
                 (it as ImageView).setImageResource(speler.symbool)
             }

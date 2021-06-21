@@ -14,7 +14,7 @@ class SpelTest {
         val speler = spelers[0]
         val spel = Spel(spelers)
 
-        Assertions.assertNull(spel.isGewonnen())
+        Assertions.assertNull(spel.winnaar())
 
         val metavlakken = Array<MetaVlak>(3){i -> spel.getVlak(Vector(i,i))}
         for(metavlak in metavlakken) {
@@ -22,7 +22,7 @@ class SpelTest {
                 metavlak.getVlak(Vector(i,i)).gekozenDoor = speler
             }
         }
-        Assertions.assertEquals(speler, spel.isGewonnen())
+        Assertions.assertEquals(speler, spel.winnaar())
     }
 
     @Test
