@@ -81,15 +81,15 @@ class ImageAdapter(private val context: Context, private val imageArray: Array<I
             val vlakPunt = Vector(position%3,position/3)
 
             val spelers = spel.spelers
-            if (spel.isBeschikbaar(spel.getMetaVlak(metaPunt).getVlak(vlakPunt))&&spel.getMetaVlak(metaPunt).isGewonnen(spel.spelers, 3)==null){
-                val speler = spel.nieuweBeurt(spel.getMetaVlak(metaPunt).getVlak(vlakPunt))
+            if (spel.isBeschikbaar(spel.getVlak(metaPunt).getVlak(vlakPunt))&&spel.getVlak(metaPunt).isGewonnen()){
+                val speler = spel.nieuweBeurt(spel.getVlak(metaPunt).getVlak(vlakPunt))
                 (it as ImageView).setImageResource(speler.symbool)
             }
-            if (spel.getMetaVlak(metaPunt).isGewonnen(spelers, 3)!=null)
-                if (spel.isGewonnen()!=null){
-                    activity.eindScherm(spel.isGewonnen()!!)
+            if (spel.getVlak(metaPunt).isGewonnen())
+                if (spel.isGewonnen()){
+                    activity.eindScherm(spel.winnaar()!!)
                 }
-            checkMetavlakIsGewonnen(spel.getMetaVlak(metaPunt))
+            checkMetavlakIsGewonnen(spel.getVlak(metaPunt))
         }
 
         container.addView(imageView)
@@ -108,7 +108,7 @@ class ImageAdapter(private val context: Context, private val imageArray: Array<I
         gridviews.add(view)
     }
     private fun checkMetavlakIsGewonnen(metavlak: MetaVlak) {
-        if(metavlak.isGewonnen(spel.spelers, 3) != null) {
+        if(metavlak.isGewonnen()) {
             for (d in gridviews.get(0).children) {
                 d.setBackgroundColor(Color.parseColor("#FB4D46"))
             }

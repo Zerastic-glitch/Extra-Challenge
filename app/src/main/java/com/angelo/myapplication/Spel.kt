@@ -1,9 +1,6 @@
 package com.angelo.myapplication
 
-class Spel (val spelers : Array<Speler>){
-    private val n = 3
-
-    private val vlakken : Array<MetaVlak> = Array<MetaVlak>(n*n) { i -> MetaVlak(i) }
+class Spel (val spelers : Array<Speler>) : TicTacToe<MetaVlak>(3) {
     private val beurten = ArrayList<Beurt>()
     private val id : Int
 
@@ -12,11 +9,8 @@ class Spel (val spelers : Array<Speler>){
     }
 
     init {
+        vlakken = Array<MetaVlak>(9) {i -> MetaVlak()}
         id=lastId++
-    }
-
-    fun isGewonnen(): Speler? {
-        return Veld.isGewonnen(spelers, vlakken, n)
     }
 
     fun nieuweBeurt(vlak : Vlak) : Speler{
@@ -25,14 +19,6 @@ class Spel (val spelers : Array<Speler>){
         vlak.gekozenDoor=speler
         beurten.add(beurt)
         return speler
-    }
-
-    fun getMetaVlak (punt : Vector) : MetaVlak {
-        return vlakken[punt.x+punt.y*3]
-    }
-
-    fun getMetaVlak (positie : Int) : MetaVlak {
-        return vlakken[positie]
     }
 
     fun isBeschikbaar (vlak : Vlak) : Boolean {
@@ -45,7 +31,4 @@ class Spel (val spelers : Array<Speler>){
         return gekozenVlak.isGewonnen(spelers,n)==null && gekozenVlak.metaVlak.isGewonnen(spelers,n)==null &&
                 (valideMetavlak.isGewonnen(spelers,n)!=null || gekozenVlak.metaVlak==valideMetavlak)
     }
-
-
-
 }

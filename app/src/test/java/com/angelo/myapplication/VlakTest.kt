@@ -1,6 +1,6 @@
 package com.angelo.myapplication
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class VlakTest {
 
@@ -9,9 +9,9 @@ class VlakTest {
     fun vlakGekozenDoor(){
 
         val vlak = Vlak()
-        Assert.assertNull(vlak.gekozenDoor)
+        Assertions.assertNull(vlak.gekozenDoor)
         vlak.gekozenDoor=Speler("testSpeler", cirkelId)
-        Assert.assertTrue(vlak.gekozenDoor is Speler)
+        Assertions.assertTrue(vlak.gekozenDoor is Speler)
 
     }
 }

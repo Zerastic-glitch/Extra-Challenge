@@ -1,21 +1,7 @@
 package com.angelo.myapplication
 
-class MetaVlak (var positie: Int) : Winbaar{
-    private val vlakken : Array<Vlak> = Array<Vlak>(9) { i -> Vlak(this, i) }
-
-    override fun isGewonnen (spelers : Array<Speler>, n : Int) : Speler?{
-        return Veld.isGewonnen(spelers, vlakken, n)
-    }
-
-    fun getVlak(punt : Vector) : Vlak {
-        return vlakken[punt.x+punt.y*3]
-    }
-
-    fun getVlak(positie : Int) : Vlak {
-        return vlakken[positie]
-    }
-
-    fun getVlakken() : Array<Vlak> {
-        return vlakken
+class MetaVlak () : Winbaar, TicTacToe<Vlak>(3) {
+    init {
+        vlakken = Array<Vlak>(9) {i -> Vlak()}
     }
 }
