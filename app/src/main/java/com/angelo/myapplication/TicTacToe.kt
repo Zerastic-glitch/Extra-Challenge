@@ -28,14 +28,14 @@ abstract class TicTacToe<T : Winbaar>(val n: Int) {
 
     fun winnaar(): Speler? {
         var result: Speler? = null;
-        result = or(result, winnaar(Vector(0, 0), Vector(1, 0)));
-        result = or(result, winnaar(Vector(0, 1), Vector(1, 0)));
-        result = or(result, winnaar(Vector(0, 2), Vector(1, 0)));
-        result = or(result, winnaar(Vector(0, 0), Vector(0, 1)));
-        result = or(result, winnaar(Vector(1, 0), Vector(0, 1)));
-        result = or(result, winnaar(Vector(2, 0), Vector(0, 1)));
+        for (i in 0..(n-1))
+        {
+            result = or(result, winnaar(Vector(0, i), Vector(1, 0)));
+            result = or(result, winnaar(Vector(i, 0), Vector(0, 1)));
+
+        }
         result = or(result, winnaar(Vector(0, 0), Vector(1, 1)));
-        result = or(result, winnaar(Vector(0, 2), Vector(1, -1)));
+        result = or(result, winnaar(Vector(0, n -1), Vector(1, -1)));
         return result;
     }
 
