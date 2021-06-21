@@ -1,10 +1,9 @@
 package com.angelo.myapplication
 
 
-abstract class TicTacToe <T : Winbaar> (val n : Int) {
+abstract class TicTacToe <T : Winbaar> (val n : Int) : Winbaar {
     lateinit var vlakken : Array<T>
-    fun isGewonnen(): Boolean { return winnaar() != null; }
-    fun winnaar(): Speler? {
+    override fun winnaar(): Speler? {
         var winnaarDiag1 : Speler? = getVlak(Vector(0,0)).winnaar()
         var winnaarDiag2 : Speler? = getVlak(Vector(n-1,0)).winnaar()
         for (i in 0 until n) {
