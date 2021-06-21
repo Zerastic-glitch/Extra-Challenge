@@ -8,7 +8,7 @@ class VlakTest {
     @Test
     fun vlakGekozenDoor(){
 
-        val vlak = Vlak()
+        val vlak = Vlak(MetaVlak(),1)
         Assertions.assertNull(vlak.gekozenDoor)
         vlak.gekozenDoor=Speler("testSpeler", cirkelId)
         Assertions.assertTrue(vlak.gekozenDoor is Speler)

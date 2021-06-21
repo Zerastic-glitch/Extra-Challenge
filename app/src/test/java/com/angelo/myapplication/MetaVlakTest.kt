@@ -13,12 +13,12 @@ class MetaVlakTest {
         val speler = spelers[0]
         val metavlak = MetaVlak()
 
-        Assertions.assertNull(metavlak.isGewonnen())
+        Assertions.assertFalse(metavlak.isGewonnen())
 
         for(i in 0..2) {
             metavlak.getVlak(Vector(i,i)).gekozenDoor = speler
         }
 
-        Assertions.assertEquals(speler, metavlak.isGewonnen())
+        Assertions.assertEquals(speler, metavlak.winnaar())
     }
 }

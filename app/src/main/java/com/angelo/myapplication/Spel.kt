@@ -27,8 +27,9 @@ class Spel (val spelers : Array<Speler>) : TicTacToe<MetaVlak>(3) {
 
     fun isValideZet(gekozenVlak : Vlak) : Boolean {
         if(beurten.size < 2) return true
-        val valideMetavlak = vlakken.get(beurten.get(beurten.size-2).vlak.positie)
-        return gekozenVlak.isGewonnen() && gekozenVlak.metaVlak.isGewonnen() &&
+        val vorigeVlak = beurten.get(beurten.size-2).vlak
+        val valideMetavlak = vlakken.get(vorigeVlak.positie)
+        return !gekozenVlak.isGewonnen() && !gekozenVlak.metaVlak.isGewonnen() &&
                 (valideMetavlak.isGewonnen() || gekozenVlak.metaVlak==valideMetavlak)
     }
 }
